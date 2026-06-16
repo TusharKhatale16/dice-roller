@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice-Roller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* Shake Animation */
+        @keyframes shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-5px, -5px) rotate(-5deg); }
+            50% { transform: translate(5px, 5px) rotate(5deg); }
+            75% { transform: translate(-5px, 5px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .shake-effect {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        img {
+            width: 70%;
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="./img/dice-roller-1.png" alt="Dice-Roller" id="dice">
+    <button type="button" onclick="rollDice()" >Roll Dice</button>
+    <script>
+        const min = 1, max = 6; // Corrected max value for a standard 6-sided die
+        const img = document.getElementById("dice");
+
+        function rollDice(){
+            // Restart animation logic
+            img.classList.remove("shake-effect");
+            void img.offsetWidth; // Force reflow to restart animation
+            img.classList.add("shake-effect");
+
+            const count = Math.floor(Math.random() * (max - min + 1)) + min;
+            const link = `./img/dice-roller-${count}.png`;
+            img.src = link;
+        }
+    </script>
+</body>
+</html>
